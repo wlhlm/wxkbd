@@ -42,7 +42,7 @@ Usage
 -----
 
     $ wxkbd -h
-    Usage: wxkbd [-r rate] [-d delay]
+    Usage: wxkbd [-V] [-r rate] [-d delay]
 
 Dependencies
 ------------

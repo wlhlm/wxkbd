@@ -31,8 +31,9 @@ typedef struct InputEventMask {
 
 static bool is_hierarchy_event(const xcb_generic_event_t *event, const xcb_query_extension_reply_t *xinput_info);
 static bool set_repeat_rate_and_delay(xcb_connection_t *connection, uint16_t rate, uint16_t delay);
-static bool str_to_unit16(const char *str, uint16_t *res);
+static bool str_to_uint16(const char *str, uint16_t *res);
 static void usage(char *progname, int exit_code);
+static void version(void);
 static void err(char *fmt, ...);
 
 static bool
@@ -94,7 +95,7 @@ set_repeat_rate_and_delay(xcb_connection_t *connection, uint16_t rate, uint16_t 
 }
 
 static bool
-str_to_unit16(const char *str, uint16_t *res)
+str_to_uint16(const char *str, uint16_t *res)
 {
 	char *end;
 	long int conversion;
@@ -126,8 +127,15 @@ err(char *fmt, ...)
 static void
 usage(char *progname, int exit_code)
 {
-	printf("Usage: %s [-r rate] [-d delay]\n", progname);
+	printf("Usage: %s [-V] [-r rate] [-d delay]\n", (progname == NULL) ? NAME : progname);
 	exit(exit_code);
+}
+
+static void
+version(void)
+{
+	printf(NAME " " VERSION "\n");
+	exit(EXIT_SUCCESS);
 }
 
 int
@@ -146,13 +154,16 @@ main(int argc, char *argv[])
 	xcb_generic_error_t *error;
 	xcb_generic_event_t *event;
 
-	while ((opt = getopt(argc, argv, "hr:d:")) != -1) {
+	while ((opt = getopt(argc, argv, "hVr:d:")) != -1) {
 		switch(opt) {
 		case 'h':
 			usage(argv[0], EXIT_SUCCESS);
 			break;
+		case 'V':
+			version();
+			break;
 		case 'r':
-			if (!str_to_unit16(optarg, &rate)) {
+			if (!str_to_uint16(optarg, &rate)) {
 				usage(argv[0], EXIT_FAILURE);
 			}
 			if (rate > 1000 || rate < 1) {
@@ -160,7 +171,7 @@ main(int argc, char *argv[])
 			}
 			break;
 		case 'd':
-			if (!str_to_unit16(optarg, &delay)) {
+			if (!str_to_uint16(optarg, &delay)) {
 				usage(argv[0], EXIT_FAILURE);
 			}
 			if (delay < 1) {
