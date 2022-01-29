@@ -44,7 +44,7 @@ is_hierarchy_event(const xcb_generic_event_t *event, const xcb_query_extension_r
 
 	xcb_ge_generic_event_t *generic_event = (xcb_ge_generic_event_t *) event;
 	if (generic_event->extension != xinput_info->major_opcode
-			|| generic_event->event_type != XCB_INPUT_HIERARCHY) {
+	    || generic_event->event_type != XCB_INPUT_HIERARCHY) {
 		return false;
 	}
 
@@ -80,10 +80,10 @@ set_repeat_rate_and_delay(xcb_connection_t *connection, uint16_t rate, uint16_t 
 	 * even simpler.
 	 */
 	cookie = xcb_xkb_set_controls_checked(connection, XCB_XKB_ID_USE_CORE_KBD,
-			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-			XCB_XKB_BOOL_CTRL_REPEAT_KEYS,
-			delay, repeat_interval,
-			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, per_key_repeat);
+	                                      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	                                      XCB_XKB_BOOL_CTRL_REPEAT_KEYS,
+	                                      delay, repeat_interval,
+	                                      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, per_key_repeat);
 	error = xcb_request_check(connection, cookie);
 	if (error) {
 		fprintf(stderr, "Cannot set keyboard repeat rate and delay: %d\n", error->error_code);
@@ -103,9 +103,9 @@ str_to_unit16(const char *str, uint16_t *res)
 	conversion = strtol(str, &end, 10);
 	if (((conversion == LONG_MIN || conversion == LONG_MAX) && errno == ERANGE)
 	    || conversion < 0
-		|| conversion > UINT16_MAX
-		|| end == str
-		|| *end != '\0') {
+	    || conversion > UINT16_MAX
+	    || end == str
+	    || *end != '\0') {
 		return false;
 	}
 
