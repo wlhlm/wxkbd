@@ -1,0 +1,11 @@
+# example systemd user service
+[Unit]
+Description=X keyboard settings daemon
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=%h/.local/bin/wxkbd -r 70 -d 300
+Restart=always
+
+[Install]
+WantedBy=xsession.target
