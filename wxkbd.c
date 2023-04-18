@@ -100,7 +100,6 @@ str_to_uint16(const char *str, uint16_t *res)
 	char *end;
 	long int conversion;
 
-
 	conversion = strtol(str, &end, 10);
 	if (((conversion == LONG_MIN || conversion == LONG_MAX) && errno == ERANGE)
 	    || conversion < 0
@@ -207,7 +206,7 @@ main(int argc, char *argv[])
 	 * xcb_input_event_mask_t, but looking at the header, the type has no space
 	 * for the actual mask:
 	 *
-	 * 	    typedef struct xcb_input_event_mask_t {
+	 *      typedef struct xcb_input_event_mask_t {
 	 *          xcb_input_device_id_t deviceid;
 	 *          uint16_t              mask_len;
 	 *      } xcb_input_event_mask_t;
@@ -218,7 +217,7 @@ main(int argc, char *argv[])
 	 *
 	 *     <struct name="EventMask">
 	 *         <field type="DeviceId" name="deviceid" altenum="Device" />
-	 *         <field type="CARD16"   name="mask_len" />
+	 *         <field type="CARD16" name="mask_len" />
 	 *         <list type="CARD32" name="mask" mask="XIEventMask">
 	 *             <fieldref>mask_len</fieldref>
 	 *         </list>
@@ -279,7 +278,7 @@ main(int argc, char *argv[])
 			 *
 			 *     xcb_input_hierarchy_info_iterator_t info = xcb_input_hierarchy_infos_iterator(e);
 			 *     for (; info.rem > 0; xcb_input_hierarchy_info_next(&info)) {
-			 *         //info.data
+			 *         // info.data
 			 *     }
 			 */
 		}
