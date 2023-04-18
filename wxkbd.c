@@ -236,11 +236,11 @@ main(int argc, char *argv[])
 	 *     } mask;
 	 *
 	 *     mask m;
-	 *     mask.head.deviceid = XCB_INPUT_DEVICE_ALL;
-	 *     mask.head.mask_len = 1 // sizeof(mask.mask) / sizeof(unit32_t) in case of multiple masks
-	 *     mask.mask = XCB_INPUT_EVENT_MASK_MOTION;
+	 *     m.head.deviceid = XCB_INPUT_DEVICE_ALL;
+	 *     m.head.mask_len = 1 // sizeof(m.mask) / sizeof(unit32_t) in case of multiple masks
+	 *     m.mask = XCB_INPUT_EVENT_MASK_MOTION;
 	 *
-	 *     xcb_input_xi_select_events(conn, scr->root, 1 &mask.head);
+	 *     xcb_input_xi_select_events(conn, scr->root, 1, &m.head);
 	 *
 	 * When we receive such a list from the server, xcb generates iterator
 	 * methods like xcb_input_xi_event_masks_iterator() and
