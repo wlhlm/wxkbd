@@ -1,7 +1,7 @@
-# sysstat - X keyboard helper
+# wxkbd - X keyboard helper
 # See LICENSE file for copyright and license details.
 
-# sysstat version
+# wxkbd version
 VERSION = 1.0
 
 # Programm name
